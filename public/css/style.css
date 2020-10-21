@@ -1,0 +1,25 @@
+*, *::after, *::before{
+	box-sizing:border-box;
+}
+body{
+	margin:0;
+	padding:0;
+}
+.my-form{
+	width:500px;
+	margin:10px auto;
+	padding:15px;
+	border: 0.5px solid #d3d3d3;
+	border-radius:10px;
+}
+.my-form form > div{
+	margin:20px 0;
+}
+.my-form input, .my-form textarea, .my-form select{
+	width:100%;
+	padding:5px;
+	border:1px solid gray;
+}
+.my-from input[type="submit"]{
+	cursor:pointer;
+}

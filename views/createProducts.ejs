@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>admin : create product</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+
+	<div class="my-form">
+		<h1>Enter product detail</h1>
+		<form name="myForm">
+			<h1 class="error-msg" style="color:red;"></h1>
+			<div>
+				<label for="title">Title</label>
+				<input type="text" required name="ProductTitle">
+			</div>
+			<div>
+				<label for="category">Category</label>
+				<select name="ProductCategory">
+					<% category.forEach(data=>{ %>
+						<option value=<%= data %>><%= data %></option>
+					<% }) %>
+				</select>
+			</div>
+			<div>
+				<label for="description">Description</label>
+				<textarea required name="ProductDescription"></textarea>
+			</div>
+			<div>
+				<label for="model">Model</label>
+				<input type="text" required name="ProductModel">
+			</div>
+			<div>
+				<label for="quantity">Quantity</label>
+				<input type="number" required name="ProductQty">
+			</div>
+			<div>
+				<label for="price">Price</label>
+				<input type="number" required name="ProductPrice">
+			</div>
+			<div>
+				<label for="image">Image</label>
+				<input type="file"  name="ProductImage" multiple>
+			</div>
+			<div>
+				<input type="submit">
+			</div>
+		</form>
+	</div>
+
+<script>
+	const myForm = document.querySelector('form');
+	const errorMsg = document.querySelector('.error-msg');
+
+	myForm.onsubmit = async (e)=>{
+		e.preventDefault();
+		
+		const formData = new FormData(myForm);
+			const response = await fetch('/product', {
+			method: 'POST',
+			body: formData
+		});
+
+		const data = await response.json();
+		console.log(data);
+		if(data.status === 'success'){
+			alert('data success fully added');
+			myForm.reset();
+		}else{
+			errMsg.innerText = `data not sent ${data.message}`;
+		}
+	}
+</script>
+
+</body>
+</html>
